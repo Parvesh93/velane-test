@@ -1,6 +1,32 @@
 {{ 'velane-product.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  /* Keep Shopify's dynamic checkout button visually consistent with the Velane pill buttons. */
+  .vlp-section .shopify-payment-button,
+  .vlp-section .shopify-payment-button__button,
+  .vlp-section .shopify-payment-button__button--unbranded,
+  .vlp-section .shopify-payment-button__button:focus,
+  .vlp-section .shopify-payment-button__button:focus-visible,
+  .vlp-section .shopify-payment-button__button--unbranded:focus,
+  .vlp-section .shopify-payment-button__button--unbranded:focus-visible,
+  .vlp-section .shopify-payment-button__button [role='button'],
+  .vlp-section .shopify-payment-button__button [role='button']:focus,
+  .vlp-section .shopify-payment-button__button [role='button']:focus-visible {
+    border: 0 !important;
+    outline: 0 !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .vlp-section .shopify-payment-button__button::before,
+  .vlp-section .shopify-payment-button__button::after,
+  .vlp-section .shopify-payment-button__button--unbranded::before,
+  .vlp-section .shopify-payment-button__button--unbranded::after {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
   #shopify-section-{{ section.id }} .vl-related-recommendations {
     display: block;
     width: 100%;
