@@ -1,19 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "velane-hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "END OF SEASON SALE · LIVE NOW",
+        "heading": "Flat 50% Off on\neverything gold.",
+        "description": "<p>Certified 925 silver with 18k gold plating. Anti-tarnish, hypoallergenic, and made to be worn every single day.</p>",
+        "button": "SHOP THE SALE",
+        "link": "",
+        "notes": "✓ 925 Sterling Silver   ·   ✓ 18k Gold Plated   ·   ✓ 6 Month Warranty",
+        "image": "shopify://shop_images/image_3_1.png",
+        "mobile_image": "shopify://shop_images/image_3_2.png",
+        "image_alt": "Gold statement necklace styled with a tailored cream blazer",
+        "featured_product": "",
+        "spotlight_title": "The Statement Necklace"
+      }
     },
     "benefits": {
       "type": "velane-benefits",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "benefit",
           "settings": {
             "icon": "truck",
             "heading": "Free Shipping",
-            "text": "On orders over \u20b92,000"
+            "text": "On orders over ₹2,000"
           }
         },
         "b1": {
@@ -46,16 +66,17 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {}
     },
     "categories": {
       "type": "velane-categories",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "category",
           "settings": {
             "title": "Rings",
+            "collection": "",
             "reference": "rings"
           }
         },
@@ -63,6 +84,7 @@
           "type": "category",
           "settings": {
             "title": "Earrings",
+            "collection": "",
             "reference": "earrings"
           }
         },
@@ -70,6 +92,7 @@
           "type": "category",
           "settings": {
             "title": "Necklaces",
+            "collection": "",
             "reference": "necklaces"
           }
         },
@@ -77,6 +100,7 @@
           "type": "category",
           "settings": {
             "title": "Bracelets",
+            "collection": "",
             "reference": "bracelets"
           }
         },
@@ -84,6 +108,7 @@
           "type": "category",
           "settings": {
             "title": "Bangles",
+            "collection": "",
             "reference": "bangles"
           }
         },
@@ -91,6 +116,7 @@
           "type": "category",
           "settings": {
             "title": "Pendants",
+            "collection": "",
             "reference": "pendants"
           }
         },
@@ -98,6 +124,7 @@
           "type": "category",
           "settings": {
             "title": "Anklets",
+            "collection": "",
             "reference": "anklets"
           }
         }
@@ -110,19 +137,23 @@
         "b4",
         "b5",
         "b6"
-      ]
+      ],
+      "settings": {
+        "heading": "Shop By Category",
+        "text": "Handpicked collections. Timeless beauty."
+      }
     },
     "promotions": {
       "type": "velane-promotions",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "gift",
           "settings": {
             "eyebrow": "CURATED FOR HIM",
-            "heading": "MEN\u2019S\nJEWELLERY",
+            "heading": "MEN’S\nJEWELLERY",
             "text": "Timeless style. Modern you.",
             "button": "FOR HIM",
+            "link": "",
             "reference": "men"
           }
         },
@@ -130,17 +161,19 @@
           "type": "gift",
           "settings": {
             "eyebrow": "CURATED FOR HER",
-            "heading": "WOMEN\u2019S\nJEWELLERY",
+            "heading": "WOMEN’S\nJEWELLERY",
             "text": "Express elegance. Celebrate you.",
             "button": "FOR HER",
+            "link": "",
             "reference": "women"
           }
         },
         "b2": {
           "type": "offer",
           "settings": {
-            "heading": "Under \u20b9999",
+            "heading": "Under ₹999",
             "text": "Elevated essentials",
+            "link": "",
             "dark": false
           }
         },
@@ -149,6 +182,7 @@
           "settings": {
             "heading": "Buy 2 Get 1",
             "text": "Build your stack",
+            "link": "",
             "dark": false
           }
         },
@@ -157,6 +191,7 @@
           "settings": {
             "heading": "New this week",
             "text": "Catch the newness",
+            "link": "",
             "dark": true
           }
         }
@@ -167,49 +202,52 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {}
     },
     "bestsellers": {
       "type": "velane-products",
-      "settings": {
-        "anchor": "velane-bestsellers",
-        "reference_offset": "0"
-      },
       "blocks": {
         "b0": {
           "type": "tab",
           "settings": {
-            "title": "Rings"
+            "title": "Rings",
+            "collection": ""
           }
         },
         "b1": {
           "type": "tab",
           "settings": {
-            "title": "Earrings"
+            "title": "Earrings",
+            "collection": ""
           }
         },
         "b2": {
           "type": "tab",
           "settings": {
-            "title": "Necklaces"
+            "title": "Necklaces",
+            "collection": ""
           }
         },
         "b3": {
           "type": "tab",
           "settings": {
-            "title": "Bracelets"
+            "title": "Bracelets",
+            "collection": ""
           }
         },
         "b4": {
           "type": "tab",
           "settings": {
-            "title": "Under \u20b9999"
+            "title": "Under ₹999",
+            "collection": ""
           }
         },
         "b5": {
           "type": "tab",
           "settings": {
-            "title": "Luxe"
+            "title": "Luxe",
+            "collection": ""
           }
         }
       },
@@ -220,11 +258,19 @@
         "b3",
         "b4",
         "b5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "BESTSELLERS",
+        "heading": "Loved By 2M+ Women",
+        "anchor": "velane-bestsellers",
+        "collection": "",
+        "limit": 4,
+        "show_reference": true,
+        "reference_offset": "0"
+      }
     },
     "craft": {
       "type": "velane-craft",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "stat",
@@ -243,7 +289,7 @@
         "b2": {
           "type": "stat",
           "settings": {
-            "value": "3\u00d7",
+            "value": "3×",
             "label": "Layer Coating"
           }
         },
@@ -260,7 +306,15 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "OUR CRAFT",
+        "heading": "Anti-tarnish.\nHand-finished.",
+        "text": "<p>Every piece is made from 925 sterling silver with a triple layer of 18k gold, engineered to stay bright through daily wear, water, and workouts.</p>",
+        "image_alt": "Artisan hand-finishing jewellery at a workbench",
+        "button": "Learn about our craft",
+        "link": ""
+      }
     },
     "new_arrivals": {
       "type": "velane-products",
@@ -268,70 +322,93 @@
         "eyebrow": "NEW ARRIVALS",
         "heading": "Fresh Drops, Timeless Style",
         "anchor": "velane-new-arrivals",
+        "collection": "",
+        "limit": 4,
+        "show_reference": true,
         "reference_offset": "4"
       }
     },
     "testimonials": {
       "type": "velane-testimonials",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "review",
-          "settings": {}
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
         },
         "b1": {
           "type": "review",
-          "settings": {}
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
         },
         "b2": {
           "type": "review",
-          "settings": {}
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
         }
       },
       "block_order": [
         "b0",
         "b1",
         "b2"
-      ]
+      ],
+      "settings": {
+        "heading": "Testimonials",
+        "text": "Real words from real customers."
+      }
     },
     "instagram": {
       "type": "velane-instagram",
-      "settings": {},
       "blocks": {
         "b0": {
           "type": "image",
           "settings": {
-            "alt": "Statement necklace styling"
+            "alt": "Statement necklace styling",
+            "link": ""
           }
         },
         "b1": {
           "type": "image",
           "settings": {
-            "alt": "Layered gold necklaces"
+            "alt": "Layered gold necklaces",
+            "link": ""
           }
         },
         "b2": {
           "type": "image",
           "settings": {
-            "alt": "Gold twist rings"
+            "alt": "Gold twist rings",
+            "link": ""
           }
         },
         "b3": {
           "type": "image",
           "settings": {
-            "alt": "Gold hoop earrings"
+            "alt": "Gold hoop earrings",
+            "link": ""
           }
         },
         "b4": {
           "type": "image",
           "settings": {
-            "alt": "Pearl pendant necklace"
+            "alt": "Pearl pendant necklace",
+            "link": ""
           }
         },
         "b5": {
           "type": "image",
           "settings": {
-            "alt": "Gold cuff bracelet"
+            "alt": "Gold cuff bracelet",
+            "link": ""
           }
         }
       },
@@ -342,7 +419,12 @@
         "b3",
         "b4",
         "b5"
-      ]
+      ],
+      "settings": {
+        "heading": "Follow Us On Instagram",
+        "handle": "@velane",
+        "link": ""
+      }
     }
   },
   "order": [
