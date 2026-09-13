@@ -1,0 +1,96 @@
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<section class="vl-section vl-products vl-wrap" id="{{ section.settings.anchor | escape }}" aria-labelledby="VlProducts-{{ section.id }}">
+  <div class="vl-section-heading vl-products-heading"><div><p class="vl-eyebrow">{{ section.settings.eyebrow | escape }}</p><h2 id="VlProducts-{{ section.id }}">{{ section.settings.heading | escape }}</h2></div><a class="vl-view-all" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">View all <span aria-hidden="true">↗</span></a></div>
+  <velane-collection-tabs>
+    {% if section.blocks.size > 0 %}<div class="vl-filters" aria-label="Product collections"><button type="button" class="vl-filter is-active" aria-pressed="true" data-vl-tab="VlPanel-{{ section.id }}-all">All</button>{% for block in section.blocks %}{% if block.settings.collection != blank %}<button type="button" class="vl-filter" aria-pressed="false" data-vl-tab="VlPanel-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>{{ block.settings.title | default: block.settings.collection.title | escape }}</button>{% endif %}{% endfor %}</div>{% endif %}
+    <div id="VlPanel-{{ section.id }}-all" class="vl-product-grid" data-vl-panel>
+      {% for product in section.settings.collection.products limit: section.settings.limit %}{% render 'velane-product-card', product: product, section_id: section.id, group_id: 'all' %}{% else %}{% if section.settings.show_reference %}{% for i in (1..4) %}{% assign number = i | plus: section.settings.reference_offset %}{% assign reference = 'product-' | append: number %}{% assign titles = 'Aurelia Twist Ring|Luna Everyday Hoops|Petal Pearl Pendant|Arc Dome Ring|Celeste Chain Layer|Mila Bold Cuff|Solstice Set of 3|Ivy Stackable Ring' | split: '|' %}{% assign title_index = number | minus: 1 %}{% render 'velane-product-card', reference: reference, title: titles[title_index] %}{% endfor %}{% elsif request.design_mode %}<p>Choose a collection in this section’s settings.</p>{% endif %}{% endfor %}
+    </div>
+    {% for block in section.blocks %}{% if block.settings.collection != blank %}<div id="VlPanel-{{ section.id }}-{{ block.id }}" class="vl-product-grid" data-vl-panel hidden>{% for product in block.settings.collection.products limit: section.settings.limit %}{% render 'velane-product-card', product: product, section_id: section.id, group_id: block.id %}{% else %}<p>No products in this collection yet.</p>{% endfor %}</div>{% endif %}{% endfor %}
+  </velane-collection-tabs>
+</section>
+{% schema %}
+{
+  "name": "Velane product edit",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BESTSELLERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved By 2M+ Women"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Section anchor",
+      "default": "velane-bestsellers"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Main collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reference",
+      "label": "Show preview cards before choosing a collection",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "reference_offset",
+      "label": "Preview product set",
+      "options": [
+        {
+          "value": "0",
+          "label": "Bestsellers"
+        },
+        {
+          "value": "4",
+          "label": "New arrivals"
+        }
+      ],
+      "default": "0"
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Collection filter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Velane product edit"
+    }
+  ]
+}
+{% endschema %}

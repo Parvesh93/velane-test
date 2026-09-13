@@ -1,0 +1,55 @@
+<section class="vl-section vl-wrap vl-instagram" aria-labelledby="VlInstagram-{{ section.id }}"><div class="vl-section-heading vl-center"><h2 id="VlInstagram-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{% if section.settings.link != blank %}<a class="vl-text-link" href="{{ section.settings.link }}" target="_blank" rel="noopener noreferrer">{{ section.settings.handle | escape }}</a>{% else %}<p>{{ section.settings.handle | escape }}</p>{% endif %}</div><div class="vl-instagram-grid">{% for block in section.blocks %}{% assign destination = block.settings.link | default: section.settings.link %}<div {{ block.shopify_attributes }}>{% if destination != blank %}<a href="{{ destination }}" target="_blank" rel="noopener noreferrer" aria-label="{{ block.settings.alt | escape }}">{% endif %}{% assign reference = 'social-' | append: forloop.index %}{% render 'velane-image', image: block.settings.image, reference: reference, alt: block.settings.alt, sizes: '(min-width: 750px) 16vw, 30vw' %}{% if destination != blank %}</a>{% endif %}</div>{% endfor %}</div></section>
+{% schema %}
+{
+  "name": "Velane Instagram",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow Us On Instagram"
+    },
+    {
+      "type": "text",
+      "id": "handle",
+      "label": "Handle",
+      "default": "@velane"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Instagram profile URL"
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image description",
+          "default": "Velane jewellery styling inspiration"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Post URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Velane Instagram"
+    }
+  ]
+}
+{% endschema %}

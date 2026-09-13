@@ -1,75 +1,359 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "velane-hero",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "velane-benefits",
+      "settings": {},
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "b0": {
+          "type": "benefit",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "icon": "truck",
+            "heading": "Free Shipping",
+            "text": "On orders over \u20b92,000"
           }
         },
-        "button": {
-          "type": "buttons",
+        "b1": {
+          "type": "benefit",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "check-mark",
+            "heading": "6 Month Warranty",
+            "text": "On every piece"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "return",
+            "heading": "Easy 15 Day Return",
+            "text": "Simple, hassle-free"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "price-tag",
+            "heading": "COD Available",
+            "text": "Pay on delivery"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
-      ],
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "categories": {
+      "type": "velane-categories",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "category",
+          "settings": {
+            "title": "Rings",
+            "reference": "rings"
+          }
+        },
+        "b1": {
+          "type": "category",
+          "settings": {
+            "title": "Earrings",
+            "reference": "earrings"
+          }
+        },
+        "b2": {
+          "type": "category",
+          "settings": {
+            "title": "Necklaces",
+            "reference": "necklaces"
+          }
+        },
+        "b3": {
+          "type": "category",
+          "settings": {
+            "title": "Bracelets",
+            "reference": "bracelets"
+          }
+        },
+        "b4": {
+          "type": "category",
+          "settings": {
+            "title": "Bangles",
+            "reference": "bangles"
+          }
+        },
+        "b5": {
+          "type": "category",
+          "settings": {
+            "title": "Pendants",
+            "reference": "pendants"
+          }
+        },
+        "b6": {
+          "type": "category",
+          "settings": {
+            "title": "Anklets",
+            "reference": "anklets"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "promotions": {
+      "type": "velane-promotions",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "gift",
+          "settings": {
+            "eyebrow": "CURATED FOR HIM",
+            "heading": "MEN\u2019S\nJEWELLERY",
+            "text": "Timeless style. Modern you.",
+            "button": "FOR HIM",
+            "reference": "men"
+          }
+        },
+        "b1": {
+          "type": "gift",
+          "settings": {
+            "eyebrow": "CURATED FOR HER",
+            "heading": "WOMEN\u2019S\nJEWELLERY",
+            "text": "Express elegance. Celebrate you.",
+            "button": "FOR HER",
+            "reference": "women"
+          }
+        },
+        "b2": {
+          "type": "offer",
+          "settings": {
+            "heading": "Under \u20b9999",
+            "text": "Elevated essentials",
+            "dark": false
+          }
+        },
+        "b3": {
+          "type": "offer",
+          "settings": {
+            "heading": "Buy 2 Get 1",
+            "text": "Build your stack",
+            "dark": false
+          }
+        },
+        "b4": {
+          "type": "offer",
+          "settings": {
+            "heading": "New this week",
+            "text": "Catch the newness",
+            "dark": true
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "bestsellers": {
+      "type": "velane-products",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "anchor": "velane-bestsellers",
+        "reference_offset": "0"
+      },
+      "blocks": {
+        "b0": {
+          "type": "tab",
+          "settings": {
+            "title": "Rings"
+          }
+        },
+        "b1": {
+          "type": "tab",
+          "settings": {
+            "title": "Earrings"
+          }
+        },
+        "b2": {
+          "type": "tab",
+          "settings": {
+            "title": "Necklaces"
+          }
+        },
+        "b3": {
+          "type": "tab",
+          "settings": {
+            "title": "Bracelets"
+          }
+        },
+        "b4": {
+          "type": "tab",
+          "settings": {
+            "title": "Under \u20b9999"
+          }
+        },
+        "b5": {
+          "type": "tab",
+          "settings": {
+            "title": "Luxe"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ]
+    },
+    "craft": {
+      "type": "velane-craft",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "stat",
+          "settings": {
+            "value": "925",
+            "label": "Sterling Silver"
+          }
+        },
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "value": "18k",
+            "label": "Gold Plated"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "value": "3\u00d7",
+            "label": "Layer Coating"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "value": "6M",
+            "label": "Warranty"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "new_arrivals": {
+      "type": "velane-products",
+      "settings": {
+        "eyebrow": "NEW ARRIVALS",
+        "heading": "Fresh Drops, Timeless Style",
+        "anchor": "velane-new-arrivals",
+        "reference_offset": "4"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
+    "testimonials": {
+      "type": "velane-testimonials",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "review",
+          "settings": {}
+        },
+        "b1": {
+          "type": "review",
+          "settings": {}
+        },
+        "b2": {
+          "type": "review",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "instagram": {
+      "type": "velane-instagram",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {
+            "alt": "Statement necklace styling"
+          }
+        },
+        "b1": {
+          "type": "image",
+          "settings": {
+            "alt": "Layered gold necklaces"
+          }
+        },
+        "b2": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold twist rings"
+          }
+        },
+        "b3": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold hoop earrings"
+          }
+        },
+        "b4": {
+          "type": "image",
+          "settings": {
+            "alt": "Pearl pendant necklace"
+          }
+        },
+        "b5": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold cuff bracelet"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ]
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "benefits",
+    "categories",
+    "promotions",
+    "bestsellers",
+    "craft",
+    "new_arrivals",
+    "testimonials",
+    "instagram"
   ]
 }

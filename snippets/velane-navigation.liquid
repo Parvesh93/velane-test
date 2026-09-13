@@ -1,0 +1,12 @@
+<ul class="vl-nav-list" role="list">
+{% if menu.links != blank %}
+  {% for link in menu.links %}
+    <li>{% if link.links != blank %}<details data-vl-disclosure><summary>{{ link.title | escape }} <span aria-hidden="true">⌄</span></summary><ul role="list">{% for child in link.links %}<li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>{% if child.links != blank %}<ul role="list">{% for grandchild in child.links %}<li><a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>{% endfor %}</ul>{% endif %}</li>{% endfor %}</ul></details>{% else %}<a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endif %}</li>
+  {% endfor %}
+{% else %}
+  <li><a href="{{ routes.root_url }}">Home</a></li>
+  <li><a href="{{ routes.all_products_collection_url }}">Shop all</a></li>
+  <li><a href="{{ routes.collections_url }}">Categories</a></li>
+  {% if request.page_type == 'index' %}<li><a href="#velane-gifting">Gift for her</a></li><li><a href="#velane-gifting">Gift for him</a></li><li><a href="#velane-new-arrivals">New arrivals</a></li><li><a href="#velane-bestsellers">Best sellers</a></li><li><a href="#velane-craft">About us</a></li><li><a href="#velane-contact">Contact us</a></li>{% endif %}
+{% endif %}
+</ul>

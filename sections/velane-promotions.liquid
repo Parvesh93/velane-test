@@ -1,0 +1,101 @@
+<section class="vl-section vl-wrap vl-promotions" id="velane-gifting" aria-label="Gifts and offers"><div class="vl-gift-grid">{% for block in section.blocks %}{% if block.type == 'gift' %}<article class="vl-gift" {{ block.shopify_attributes }}><div class="vl-gift-copy"><p class="vl-eyebrow">{{ block.settings.eyebrow | escape }}</p><h2>{{ block.settings.heading | escape | newline_to_br }}</h2><p>{{ block.settings.text | escape }}</p><a class="vl-button" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.button | escape }} <span aria-hidden="true">→</span></a></div>{% render 'velane-image', image: block.settings.image, reference: block.settings.reference, alt: block.settings.heading, sizes: '(min-width: 750px) 25vw, 50vw' %}</article>{% endif %}{% endfor %}</div><div class="vl-offer-grid">{% for block in section.blocks %}{% if block.type == 'offer' %}<a class="vl-offer{% if block.settings.dark %} vl-offer--dark{% endif %}" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}><div><h3>{{ block.settings.heading | escape }}</h3><p>{{ block.settings.text | escape }}</p></div><span class="vl-icon">{{ 'icon-arrow.svg' | inline_asset_content }}</span></a>{% endif %}{% endfor %}</div></section>
+{% schema %}
+{
+  "name": "Velane promotions",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "gift",
+      "name": "Gift collection",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "CURATED FOR HIM"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "MEN\u2019S\nJEWELLERY"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Timeless style. Modern you."
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button label",
+          "default": "FOR HIM"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Portrait"
+        },
+        {
+          "type": "select",
+          "id": "reference",
+          "label": "Placeholder layout",
+          "options": [
+            {
+              "value": "men",
+              "label": "Men"
+            },
+            {
+              "value": "women",
+              "label": "Women"
+            }
+          ],
+          "default": "men"
+        }
+      ]
+    },
+    {
+      "type": "offer",
+      "name": "Offer",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Under \u20b9999"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Elevated essentials"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "dark",
+          "label": "Dark background",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Velane promotions"
+    }
+  ]
+}
+{% endschema %}
