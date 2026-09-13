@@ -1,27 +1,66 @@
 {{ 'velane-product.css' | asset_url | stylesheet_tag }}
 
-<section class="vlp-section vl-related">
-  <product-recommendations
-    class="vlp-wrap"
-    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
-    data-section-id="{{ section.id }}"
-    data-product-id="{{ product.id }}"
-  >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
-      <div class="vl-related-head">
-        <div>
-          <p class="vlp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-          <h2>{{ section.settings.heading | escape }}</h2>
+{%- style -%}
+  #shopify-section-{{ section.id }} .vl-related-recommendations {
+    display: block;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .vl-product-media {
+    aspect-ratio: 1 / 1;
+  }
+
+  #shopify-section-{{ section.id }} .vl-product h3 {
+    margin-top: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .vl-product h3 a,
+  #shopify-section-{{ section.id }} .vl-related-view {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .vl-product h3 a:hover,
+  #shopify-section-{{ section.id }} .vl-related-view:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .vl-product .price {
+    margin-top: 4px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .vl-product-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+{%- endstyle -%}
+
+<section class="vlp-section vl-section vl-related">
+  <div class="vlp-wrap">
+    <product-recommendations
+      class="vl-related-recommendations"
+      data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+    >
+      {% if recommendations.performed and recommendations.products_count > 0 %}
+        <div class="vl-related-head">
+          <div>
+            <p class="vlp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+            <h2>{{ section.settings.heading | escape }}</h2>
+          </div>
+          {% if section.settings.show_view_all %}<a class="vl-related-view" href="{{ routes.all_products_collection_url }}">View all →</a>{% endif %}
         </div>
-        {% if section.settings.show_view_all %}<a class="vl-related-view" href="{{ routes.all_products_collection_url }}">View all →</a>{% endif %}
-      </div>
-      <div class="vl-product-grid">
-        {% for recommendation in recommendations.products %}
-          {% render 'velane-product-card', product: recommendation, section_id: section.id, group_id: 'related' %}
-        {% endfor %}
-      </div>
-    {% endif %}
-  </product-recommendations>
+        <div class="vl-product-grid">
+          {% for recommendation in recommendations.products %}
+            {% render 'velane-product-card', product: recommendation, section_id: section.id, group_id: 'related' %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </product-recommendations>
+  </div>
 </section>
 
 {% schema %}
