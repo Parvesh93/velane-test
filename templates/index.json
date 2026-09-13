@@ -212,7 +212,7 @@
           "type": "tab",
           "settings": {
             "title": "Rings",
-            "collection": ""
+            "collection": "earring"
           }
         },
         "b1": {
@@ -263,7 +263,7 @@
         "eyebrow": "BESTSELLERS",
         "heading": "Loved By 2M+ Women",
         "anchor": "velane-bestsellers",
-        "collection": "",
+        "collection": "earring",
         "limit": 4,
         "show_reference": true,
         "reference_offset": "0"
