@@ -1,0 +1,299 @@
+{{ 'velane-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'velane-product.js' | asset_url }}" defer="defer"></script>
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_tags_downcase = product.tags | join: ',' | downcase -%}
+{%- assign current_compare = current_variant.compare_at_price -%}
+{%- assign current_discount = 0 -%}
+{%- if current_compare > current_variant.price -%}
+  {%- assign current_discount = current_compare | minus: current_variant.price | times: 100.0 | divided_by: current_compare | round -%}
+{%- endif -%}
+
+<section class="vlp-section">
+  <velane-product class="vlp-wrap vlp-main" data-section-id="{{ section.id }}">
+    <div class="vlp-gallery">
+      <div class="vlp-gallery-desktop" aria-label="{{ product.title | escape }} product media">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media limit: 6 -%}
+            <a class="vlp-media" href="{{ media.preview_image | image_url: width: 1800 }}" data-media-id="{{ media.id }}">
+              {{ media.preview_image | image_url: width: 1200 | image_tag: widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 31vw, 50vw', loading: 'lazy', alt: media.alt | default: product.title }}
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="vlp-empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="vlp-gallery-mobile">
+        {%- if product.media.size > 0 -%}
+          {%- assign first_media = current_variant.featured_media | default: product.featured_media | default: product.media.first -%}
+          <div class="vlp-mobile-main">
+            <img
+              data-vlp-mobile-main
+              src="{{ first_media.preview_image | image_url: width: 1200 }}"
+              alt="{{ first_media.alt | default: product.title | escape }}"
+              width="{{ first_media.preview_image.width }}"
+              height="{{ first_media.preview_image.height }}"
+              loading="eager"
+            >
+          </div>
+          <div class="vlp-thumbs" aria-label="Product thumbnails">
+            {%- for media in product.media limit: 6 -%}
+              <button
+                type="button"
+                class="vlp-thumb{% if media.id == first_media.id %} is-selected{% endif %}"
+                data-vlp-thumb
+                data-media-id="{{ media.id }}"
+                data-src="{{ media.preview_image | image_url: width: 1200 }}"
+                data-alt="{{ media.alt | default: product.title | escape }}"
+                aria-label="View image {{ forloop.index }}"
+              >
+                {{ media.preview_image | image_url: width: 180 | image_tag: widths: '90, 120, 180', sizes: '72px', loading: 'lazy', alt: media.alt | default: product.title }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="vlp-empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="vlp-info">
+      <div class="vlp-info-inner">
+        <h1 class="vlp-title">{{ product.title | escape }}</h1>
+
+        {%- if product.metafields.reviews.rating.value != blank -%}
+          <p class="vlp-rating">★ {{ product.metafields.reviews.rating.value }}{% if product.metafields.reviews.rating_count != blank %} <span>({{ product.metafields.reviews.rating_count }})</span>{% endif %}</p>
+        {%- endif -%}
+
+        <div class="vlp-price-row">
+          <span class="vlp-price" data-vlp-price>{{ current_variant.price | money }}</span>
+          <span class="vlp-compare" data-vlp-compare{% unless current_compare > current_variant.price %} hidden{% endunless %}>{% if current_compare > current_variant.price %}{{ current_compare | money }}{% endif %}</span>
+          <span class="vlp-pill" data-vlp-discount{% if current_discount == 0 %} hidden{% endif %}>{% if current_discount > 0 %}{{ current_discount }}%{% endif %}</span>
+          {%- if section.settings.show_bestseller_badge or product_tags_downcase contains 'best seller' or product_tags_downcase contains 'bestseller' -%}
+            <span class="vlp-pill">Best Seller</span>
+          {%- endif -%}
+        </div>
+        <p class="vlp-tax">All taxes are included in MRP. Shipping and duties calculated at checkout.</p>
+
+        {%- if product.description != blank -%}
+          <p class="vlp-lead">{{ product.description | strip_html | truncate: 260 }}</p>
+        {%- elsif section.settings.lead_fallback != blank -%}
+          <p class="vlp-lead">{{ section.settings.lead_fallback | escape }}</p>
+        {%- endif -%}
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="vlp-options">
+            {%- for option in product.options_with_values -%}
+              {%- assign option_index = forloop.index0 -%}
+              {%- assign selected_value = current_variant.options[option_index] -%}
+              {%- assign option_name_downcase = option.name | downcase -%}
+              <fieldset class="vlp-option" data-vlp-option-group>
+                <div class="vlp-option-head">
+                  <legend>{{ option.name | escape }} :</legend>
+                  {%- if option_name_downcase contains 'size' and section.settings.size_chart_page != blank -%}
+                    <a class="vlp-size-link" href="{{ section.settings.size_chart_page.url }}">Size chart</a>
+                  {%- endif -%}
+                </div>
+                <div class="vlp-option-values">
+                  {%- for value in option.values -%}
+                    <button
+                      type="button"
+                      class="vlp-option-button{% if value == selected_value %} is-selected{% endif %}"
+                      data-vlp-option
+                      data-option-position="{{ option.position }}"
+                      data-value="{{ value | escape }}"
+                      aria-pressed="{% if value == selected_value %}true{% else %}false{% endif %}"
+                    >{{ value }}</button>
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+
+        {%- if section.settings.show_offers -%}
+          <div class="vlp-offers">
+            <p class="vlp-offers-title">Available Offers :</p>
+            <div class="vlp-offer-grid">
+              <div class="vlp-offer">
+                <span class="vlp-offer-dot" aria-hidden="true"></span>
+                <div><p class="vlp-offer-title">{{ section.settings.offer_1_title | escape }}</p><p class="vlp-offer-sub">{{ section.settings.offer_1_subtitle | escape }}</p></div>
+                <div class="vlp-offer-value">{{ section.settings.offer_1_value | escape }}{% if section.settings.offer_1_old != blank %}<span class="vlp-offer-old">{{ section.settings.offer_1_old | escape }}</span>{% endif %}</div>
+                {% if section.settings.offer_1_code != blank %}<span class="vlp-code">{{ section.settings.offer_1_code | escape }}</span>{% endif %}
+              </div>
+              <div class="vlp-offer">
+                <span class="vlp-offer-dot" aria-hidden="true"></span>
+                <div><p class="vlp-offer-title">{{ section.settings.offer_2_title | escape }}</p><p class="vlp-offer-sub">{{ section.settings.offer_2_subtitle | escape }}</p></div>
+                <div class="vlp-offer-value">{{ section.settings.offer_2_value | escape }}{% if section.settings.offer_2_old != blank %}<span class="vlp-offer-old">{{ section.settings.offer_2_old | escape }}</span>{% endif %}</div>
+                {% if section.settings.offer_2_code != blank %}<span class="vlp-code">{{ section.settings.offer_2_code | escape }}</span>{% endif %}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- assign product_form_id = 'VelaneProductForm-' | append: section.id -%}
+        {% form 'product', product, id: product_form_id, class: 'vlp-product-form' %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+          <div class="vlp-buy-row">
+            <div class="vlp-qty" aria-label="Quantity selector">
+              <button type="button" data-vlp-qty-button="-1" aria-label="Decrease quantity">−</button>
+              <input
+                data-vlp-qty
+                type="number"
+                name="quantity"
+                value="{{ current_variant.quantity_rule.min | default: 1 }}"
+                min="{{ current_variant.quantity_rule.min | default: 1 }}"
+                step="{{ current_variant.quantity_rule.increment | default: 1 }}"
+                {% if current_variant.quantity_rule.max != null %}max="{{ current_variant.quantity_rule.max }}"{% endif %}
+                aria-label="Quantity"
+              >
+              <button type="button" data-vlp-qty-button="1" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="vlp-add" type="submit" name="add" data-vlp-add{% unless current_variant.available %} disabled{% endunless %}>
+              <span data-vlp-add-label>{% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+            </button>
+          </div>
+          {%- if section.settings.show_dynamic_checkout -%}
+            {{ form | payment_button }}
+          {%- endif -%}
+        {% endform %}
+
+        <div class="vlp-accordions">
+          <details class="vlp-accordion" open>
+            <summary>Description</summary>
+            <div class="vlp-accordion-content rte">
+              {% if product.description != blank %}{{ product.description }}{% else %}{{ section.settings.description_fallback }}{% endif %}
+            </div>
+          </details>
+          <details class="vlp-accordion">
+            <summary>Care</summary>
+            <div class="vlp-accordion-content rte">
+              {% if product.metafields.custom.care != blank %}{{ product.metafields.custom.care | metafield_tag }}{% else %}{{ section.settings.care }}{% endif %}
+            </div>
+          </details>
+          <details class="vlp-accordion">
+            <summary>Delivery &amp; Return</summary>
+            <div class="vlp-accordion-content rte">
+              {% if product.metafields.custom.delivery_return != blank %}{{ product.metafields.custom.delivery_return | metafield_tag }}{% else %}{{ section.settings.delivery_return }}{% endif %}
+            </div>
+          </details>
+          <details class="vlp-accordion">
+            <summary>Further Information</summary>
+            <div class="vlp-accordion-content rte">
+              {% if product.metafields.custom.further_information != blank %}{{ product.metafields.custom.further_information | metafield_tag }}{% else %}{{ section.settings.further_information }}{% endif %}
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <script type="application/json" data-vlp-variants>
+      [
+        {%- for variant in product.variants -%}
+          {%- assign variant_discount = 0 -%}
+          {%- if variant.compare_at_price > variant.price -%}
+            {%- assign variant_discount = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
+          {%- endif -%}
+          {
+            "id": {{ variant.id | json }},
+            "available": {{ variant.available | json }},
+            "price": {{ variant.price | money | json }},
+            "priceRaw": {{ variant.price | json }},
+            "compareAt": {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}""{% endif %},
+            "compareRaw": {{ variant.compare_at_price | default: 0 | json }},
+            "discount": {{ variant_discount | json }},
+            "options": {{ variant.options | json }},
+            "featuredMediaId": {{ variant.featured_media.id | default: 0 | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    </script>
+  </velane-product>
+
+  <div class="vlp-benefits">
+    <div class="vlp-wrap vlp-benefits-grid">
+      <div class="vlp-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+        <div><strong>{{ section.settings.benefit_1_title | escape }}</strong><small>{{ section.settings.benefit_1_text | escape }}</small></div>
+      </div>
+      <div class="vlp-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 6 2v6c0 4-2.5 7-6 9-3.5-2-6-5-6-9V5l6-2Z"/><path d="m9 11 2 2 4-4"/></svg>
+        <div><strong>{{ section.settings.benefit_2_title | escape }}</strong><small>{{ section.settings.benefit_2_text | escape }}</small></div>
+      </div>
+      <div class="vlp-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8"/><path d="M4 4v4h4"/></svg>
+        <div><strong>{{ section.settings.benefit_3_title | escape }}</strong><small>{{ section.settings.benefit_3_text | escape }}</small></div>
+      </div>
+      <div class="vlp-benefit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h8"/></svg>
+        <div><strong>{{ section.settings.benefit_4_title | escape }}</strong><small>{{ section.settings.benefit_4_text | escape }}</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vlp-details">
+    <div class="vlp-wrap vlp-details-grid">
+      <div>
+        <p class="vlp-eyebrow">{{ section.settings.details_eyebrow | escape }}</p>
+        <h2>{{ section.settings.details_heading | escape }}</h2>
+        <p class="vlp-details-copy">{% if product.description != blank %}{{ product.description | strip_html | truncate: 220 }}{% else %}{{ section.settings.details_text | escape }}{% endif %}</p>
+      </div>
+      <div class="vlp-spec-grid">
+        <div class="vlp-spec"><span>Material</span><strong>{% if product.metafields.custom.material != blank %}{{ product.metafields.custom.material | metafield_text }}{% else %}{{ section.settings.material_fallback | escape }}{% endif %}</strong></div>
+        <div class="vlp-spec"><span>Finish</span><strong>{% if product.metafields.custom.finish != blank %}{{ product.metafields.custom.finish | metafield_text }}{% else %}{{ section.settings.finish_fallback | escape }}{% endif %}</strong></div>
+        <div class="vlp-spec"><span>Weight</span><strong>{% if product.metafields.custom.weight != blank %}{{ product.metafields.custom.weight | metafield_text }}{% else %}{{ section.settings.weight_fallback | escape }}{% endif %}</strong></div>
+        <div class="vlp-spec"><span>{{ section.settings.spec_4_label | escape }}</span><strong>{% if product.metafields.custom.band_width != blank %}{{ product.metafields.custom.band_width | metafield_text }}{% else %}{{ section.settings.spec_4_fallback | escape }}{% endif %}</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Velane product",
+  "settings": [
+    {"type":"checkbox","id":"show_bestseller_badge","label":"Show Best Seller badge","default":true},
+    {"type":"page","id":"size_chart_page","label":"Size chart page"},
+    {"type":"checkbox","id":"show_dynamic_checkout","label":"Show dynamic checkout button","default":true},
+    {"type":"text","id":"lead_fallback","label":"Fallback short description","default":"A softly sculpted piece, hand-finished and made to move with you from morning coffee to candlelight dinners."},
+    {"type":"checkbox","id":"show_offers","label":"Show offer cards","default":true},
+    {"type":"header","content":"Offer 1"},
+    {"type":"text","id":"offer_1_title","label":"Title","default":"Get 10% OFF"},
+    {"type":"text","id":"offer_1_subtitle","label":"Subtitle","default":"Minimum ₹4,000 ORDER"},
+    {"type":"text","id":"offer_1_value","label":"Value","default":"₹4,500"},
+    {"type":"text","id":"offer_1_old","label":"Old value","default":"₹5,000"},
+    {"type":"text","id":"offer_1_code","label":"Code","default":"SAVE10"},
+    {"type":"header","content":"Offer 2"},
+    {"type":"text","id":"offer_2_title","label":"Title","default":"Get 10% OFF"},
+    {"type":"text","id":"offer_2_subtitle","label":"Subtitle","default":"Minimum ₹6,000 ORDER"},
+    {"type":"text","id":"offer_2_value","label":"Value","default":"₹8,000"},
+    {"type":"text","id":"offer_2_old","label":"Old value","default":"₹10,000"},
+    {"type":"text","id":"offer_2_code","label":"Code","default":"SAVE20"},
+    {"type":"header","content":"Product accordions"},
+    {"type":"richtext","id":"description_fallback","label":"Description fallback","default":"<p>Every Velane piece is finished by hand for a refined, everyday feel.</p>"},
+    {"type":"richtext","id":"care","label":"Care","default":"<p>Keep away from perfume and harsh chemicals. Store dry and wipe gently with a soft cloth after wear.</p>"},
+    {"type":"richtext","id":"delivery_return","label":"Delivery & return","default":"<p>Orders are carefully packed and dispatched as per the delivery promise shown at checkout. Returns are accepted as per store policy.</p>"},
+    {"type":"richtext","id":"further_information","label":"Further information","default":"<p>Colour and finish may vary slightly because every piece is photographed and finished individually.</p>"},
+    {"type":"header","content":"Benefits"},
+    {"type":"text","id":"benefit_1_title","label":"Benefit 1 title","default":"Free Shipping"},
+    {"type":"text","id":"benefit_1_text","label":"Benefit 1 text","default":"On orders over ₹499"},
+    {"type":"text","id":"benefit_2_title","label":"Benefit 2 title","default":"6-Month Warranty"},
+    {"type":"text","id":"benefit_2_text","label":"Benefit 2 text","default":"On every piece"},
+    {"type":"text","id":"benefit_3_title","label":"Benefit 3 title","default":"Easy 15-Day Returns"},
+    {"type":"text","id":"benefit_3_text","label":"Benefit 3 text","default":"No questions asked"},
+    {"type":"text","id":"benefit_4_title","label":"Benefit 4 title","default":"COD Available"},
+    {"type":"text","id":"benefit_4_text","label":"Benefit 4 text","default":"Pay when delivered"},
+    {"type":"header","content":"The details"},
+    {"type":"text","id":"details_eyebrow","label":"Eyebrow","default":"The details"},
+    {"type":"text","id":"details_heading","label":"Heading","default":"Crafted to be worn, loved, and kept."},
+    {"type":"text","id":"details_text","label":"Fallback text","default":"Every Velane piece is finished by hand and designed for everyday wear."},
+    {"type":"text","id":"material_fallback","label":"Material fallback","default":"925 Silver · 18K Gold dip"},
+    {"type":"text","id":"finish_fallback","label":"Finish fallback","default":"High-polish, anti-tarnish"},
+    {"type":"text","id":"weight_fallback","label":"Weight fallback","default":"3.2 g"},
+    {"type":"text","id":"spec_4_label","label":"Fourth specification label","default":"Band width"},
+    {"type":"text","id":"spec_4_fallback","label":"Fourth specification fallback","default":"2.4 mm"}
+  ],
+  "presets": [{"name":"Velane product"}]
+}
+{% endschema %}

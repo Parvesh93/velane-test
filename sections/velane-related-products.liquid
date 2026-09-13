@@ -1,0 +1,38 @@
+{{ 'velane-product.css' | asset_url | stylesheet_tag }}
+
+<section class="vlp-section vl-related">
+  <product-recommendations
+    class="vlp-wrap"
+    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+  >
+    {% if recommendations.performed and recommendations.products_count > 0 %}
+      <div class="vl-related-head">
+        <div>
+          <p class="vlp-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h2>{{ section.settings.heading | escape }}</h2>
+        </div>
+        {% if section.settings.show_view_all %}<a class="vl-related-view" href="{{ routes.all_products_collection_url }}">View all →</a>{% endif %}
+      </div>
+      <div class="vl-product-grid">
+        {% for recommendation in recommendations.products %}
+          {% render 'velane-product-card', product: recommendation, section_id: section.id, group_id: 'related' %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </product-recommendations>
+</section>
+
+{% schema %}
+{
+  "name":"Velane recommendations",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Style for you"},
+    {"type":"text","id":"heading","label":"Heading","default":"You May Also Like"},
+    {"type":"range","id":"products_to_show","label":"Products to show","min":2,"max":8,"step":1,"default":4},
+    {"type":"checkbox","id":"show_view_all","label":"Show view all","default":true}
+  ],
+  "presets":[{"name":"Velane recommendations"}]
+}
+{% endschema %}
