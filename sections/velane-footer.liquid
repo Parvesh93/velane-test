@@ -1,0 +1,70 @@
+<footer class="vl-footer" id="velane-contact">
+  {% if section.settings.newsletter %}<div class="vl-newsletter"><div class="vl-wrap"><h2>{{ section.settings.heading | escape }}</h2><p>{{ section.settings.text | escape }}</p>{% assign newsletter_id = 'VlNewsletter-' | append: section.id %}{% form 'customer', id: newsletter_id, class: 'vl-newsletter-form' %}<input type="hidden" name="contact[tags]" value="newsletter"><div class="vl-newsletter-fields"><label class="visually-hidden" for="VlEmail-{{ section.id }}">Email address</label><input id="VlEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Enter your email" autocomplete="email" autocorrect="off" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="VlEmailError-{{ section.id }}"{% endif %}><button type="submit" class="vl-button">Subscribe</button></div>{% if form.errors %}<div id="VlEmailError-{{ section.id }}" role="alert">{{ form.errors | default_errors }}</div>{% endif %}{% if form.posted_successfully? %}<p tabindex="-1" role="status">{{ 'newsletter.success' | t }}</p>{% endif %}{% endform %}</div></div>{% endif %}
+  <div class="vl-wrap vl-footer-grid"><div><h2>About us</h2><div class="vl-footer-about">{{ section.settings.about }}</div>{% render 'social-icons' %}</div><div><h2>Shop</h2><ul role="list">{% if section.settings.shop_menu.links != blank %}{% for link in section.settings.shop_menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}{% else %}<li><a href="{{ routes.root_url }}">Home</a></li><li><a href="{{ routes.all_products_collection_url }}">Shop all</a></li><li><a href="{{ routes.collections_url }}">Collections</a></li>{% endif %}</ul></div><div><h2>Support</h2><ul role="list">{% if section.settings.support_menu.links != blank %}{% for link in section.settings.support_menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}{% else %}{% for policy in shop.policies %}{% if policy != blank %}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{% endif %}{% endfor %}{% endif %}</ul></div><div><h2>Reach us</h2>{{ section.settings.address }}{% if section.settings.email != blank %}<p>Email: <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a></p>{% endif %}{% if section.settings.phone != blank %}<p>Contact: <a href="tel:{{ section.settings.phone | remove: ' ' | escape }}">{{ section.settings.phone | escape }}</a></p>{% endif %}</div></div>
+</footer>
+{% schema %}
+{
+  "name": "Velane footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Newsletter heading",
+      "default": "Get 10% off your first order"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Newsletter description",
+      "default": "Subscribe for new drops, exclusive deals and styling tips \u2014 straight to your inbox."
+    },
+    {
+      "type": "richtext",
+      "id": "about",
+      "label": "About Velane",
+      "default": "<p>At Velane Jewellery, we believe every piece tells a story. Crafted with elegance and designed for everyday wear, our collections blend timeless beauty.</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Support menu"
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
+  "presets": [
+    {
+      "name": "Velane footer"
+    }
+  ]
+}
+{% endschema %}

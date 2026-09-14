@@ -1,0 +1,16 @@
+{% if product != blank %}
+  <article class="vl-product">
+    <div class="vl-product-media"><a href="{{ product.url }}" aria-label="{{ product.title | escape }}">{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 800 | image_tag: widths: '200, 360, 540, 800', sizes: '(min-width: 750px) 23vw, 46vw', loading: 'lazy', alt: product.title }}{% else %}{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}{% endif %}</a>
+      {% unless product.available %}<span class="vl-badge">{{ 'products.product.sold_out' | t }}</span>{% else %}{% if product.compare_at_price > product.price %}<span class="vl-badge">{{ 'products.product.on_sale' | t }}</span>{% endif %}{% endunless %}
+      {% if product.available and product.has_only_default_variant and product.requires_selling_plan != true %}
+        {% assign form_id = 'VlProduct-' | append: section_id | append: '-' | append: group_id | append: '-' | append: product.id %}
+        {% form 'product', product, id: form_id, class: 'vl-product-form' %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><input type="hidden" name="quantity" value="{{ product.selected_or_first_available_variant.quantity_rule.min | default: 1 }}"><button type="submit" name="add" class="vl-button">{{ 'products.product.add_to_cart' | t }}</button>{% endform %}
+      {% else %}<a class="vl-button vl-product-link" href="{{ product.url }}">{% if product.available %}{{ 'products.product.choose_options' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</a>{% endif %}
+    </div>
+    {% if product.metafields.reviews.rating.value != blank %}<p class="vl-rating">★ {{ product.metafields.reviews.rating.value }}{% if product.metafields.reviews.rating_count != blank %} <span>({{ product.metafields.reviews.rating_count }})</span>{% endif %}</p>{% endif %}
+    <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    {% render 'price', product: product, show_compare_at_price: true %}
+  </article>
+{% else %}
+  <article class="vl-product vl-product--demo"><div class="vl-product-media">{% render 'velane-image', reference: reference, alt: title, sizes: '(min-width: 750px) 23vw, 46vw' %}<a class="vl-button vl-product-link" href="{{ routes.all_products_collection_url }}">View collection</a></div><h3>{{ title | escape }}</h3>{% if request.design_mode %}<p class="vl-editor-note">Choose a collection to display live products and prices.</p>{% endif %}</article>
+{% endif %}

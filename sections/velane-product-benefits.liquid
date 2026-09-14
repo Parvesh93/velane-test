@@ -1,0 +1,807 @@
+<style>
+  /* Shared product page geometry — keep every section on the same 1320px design grid. */
+  product-info .page-width,
+  .velane-product-benefits .page-width,
+  .velane-product-details .page-width,
+  .related-products.page-width {
+    width: calc(100% - 64px) !important;
+    max-width: 1320px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Main product: balanced Figma-style 50/50 columns. */
+  product-info .product {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 32px !important;
+    align-items: start !important;
+    margin: 0 !important;
+  }
+
+  product-info .product__media-wrapper,
+  product-info .product__info-wrapper {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+
+  product-info .product__info-container {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+
+  product-info .product__info-container > * {
+    grid-column: 1 / -1;
+  }
+
+  product-info .product__column-sticky {
+    top: 24px !important;
+  }
+
+  /* Gallery */
+  product-info .product__media-list {
+    gap: 16px !important;
+  }
+
+  product-info .product-media-container {
+    aspect-ratio: 1 / 1 !important;
+    overflow: hidden !important;
+    border-radius: 10px !important;
+    background: #f3efe8 !important;
+  }
+
+  product-info .product__modal-opener,
+  product-info .product__media {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  product-info .product__media {
+    aspect-ratio: 1 / 1 !important;
+    padding-top: 0 !important;
+    overflow: hidden !important;
+    border-radius: 10px !important;
+  }
+
+  product-info .product__media img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+  }
+
+  product-info .product__media-toggle,
+  product-info .product__media-toggle::after {
+    border-radius: 10px !important;
+  }
+
+  product-info .product__media-icon {
+    width: 38px !important;
+    height: 38px !important;
+    background: rgba(255,255,255,.94) !important;
+    border: 0 !important;
+    box-shadow: 0 3px 14px rgba(0,0,0,.08) !important;
+  }
+
+  @media screen and (min-width: 990px) {
+    product-info .product--columns .product__media-list {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 16px !important;
+    }
+
+    product-info .product--columns .product__media-item {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+    product-info .product--columns .product__media-list:has(.product__media-item:only-child) {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Product information sizing and rhythm. */
+  product-info .product__title {
+    margin: 0 0 8px !important;
+  }
+
+  product-info .product__title h1 {
+    font-size: clamp(30px, 2vw, 34px) !important;
+    line-height: 1.12 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  product-info .price--large {
+    font-size: 19px !important;
+    line-height: 1.3 !important;
+  }
+
+  product-info .price--on-sale .price-item--regular {
+    font-size: 13px !important;
+  }
+
+  product-info .badge {
+    font-size: 9px !important;
+    padding: 5px 9px !important;
+    border-radius: 999px !important;
+  }
+
+  product-info .product__tax,
+  product-info .installment {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  product-info .product__text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 18px 0 20px !important;
+    max-width: 100% !important;
+  }
+
+  product-info .product-form__input {
+    max-width: none !important;
+    margin-bottom: 18px !important;
+  }
+
+  product-info .product-form__input .form__label {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    font-weight: 500 !important;
+    margin-bottom: 9px !important;
+  }
+
+  product-info .product-form__input input[type=radio] + label {
+    min-width: 40px !important;
+    min-height: 36px !important;
+    margin: 0 7px 6px 0 !important;
+    padding: 9px 12px !important;
+    border-radius: 0 !important;
+    border: 1px solid #c9cec4 !important;
+    background: transparent !important;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  product-info .product-form__input input[type=radio]:checked + label {
+    background: #fff !important;
+    color: #20251e !important;
+    border-color: #20251e !important;
+    box-shadow: inset 0 0 0 1px #20251e !important;
+  }
+
+  /* Quantity + Add to cart share one row; Buy it now spans full width below. */
+  product-info .product-form__quantity {
+    grid-column: 1 !important;
+    max-width: 112px !important;
+    margin: 4px 0 10px !important;
+    align-self: start !important;
+  }
+
+  product-info .quantity__label {
+    display: none !important;
+  }
+
+  product-info quantity-input.quantity {
+    width: 112px !important;
+    min-height: 44px !important;
+    border: 1px solid #bdc5b8 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+  }
+
+  product-info .quantity::before,
+  product-info .quantity::after {
+    display: none !important;
+  }
+
+  product-info .quantity__button {
+    width: 34px !important;
+  }
+
+  product-info .quantity__input {
+    font-size: 13px !important;
+  }
+
+  product-info .product__info-container > div:has(> product-form.product-form),
+  product-info product-form.product-form,
+  product-info product-form.product-form form.form,
+  product-info .product-form__buttons {
+    display: contents !important;
+  }
+
+  product-info .product-form__error-message-wrapper,
+  product-info pickup-availability {
+    grid-column: 1 / -1 !important;
+  }
+
+  product-info .product-form__submit {
+    grid-column: 2 !important;
+    min-height: 44px !important;
+    margin: 4px 0 10px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #5c6b53 !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    letter-spacing: .065em !important;
+    text-transform: uppercase !important;
+  }
+
+  product-info .product-form__submit::before,
+  product-info .product-form__submit::after {
+    display: none !important;
+  }
+
+  product-info .shopify-payment-button {
+    grid-column: 1 / -1 !important;
+    margin: 0 0 12px !important;
+  }
+
+  product-info .shopify-payment-button__button,
+  product-info .shopify-payment-button__button--unbranded {
+    min-height: 44px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: #5c6b53 !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    letter-spacing: .065em !important;
+    text-transform: uppercase !important;
+  }
+
+  /* Offers */
+  product-info .velane-offers-block {
+    margin: 16px 0 14px !important;
+  }
+
+  product-info .velane-offers-heading {
+    font-size: 14px !important;
+    margin: 0 0 10px !important;
+  }
+
+  product-info .velane-offers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  product-info .velane-offer-card {
+    padding: 12px !important;
+    gap: 8px !important;
+    border-radius: 7px !important;
+  }
+
+  product-info .velane-offer-title,
+  product-info .velane-offer-value {
+    font-size: 12px !important;
+  }
+
+  product-info .velane-offer-sub,
+  product-info .velane-offer-value s {
+    font-size: 9px !important;
+  }
+
+  product-info .velane-offer-code {
+    font-size: 8px !important;
+  }
+
+  /* Description / accordion */
+  product-info .product__description {
+    grid-column: 1 / -1 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    margin: 8px 0 0 !important;
+    padding: 16px 0 18px !important;
+    border-top: 1px solid #d7ddd1 !important;
+  }
+
+  product-info .product__description::before {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+    letter-spacing: .07em !important;
+  }
+
+  product-info .product__accordion {
+    grid-column: 1 / -1 !important;
+    margin: 0 !important;
+    border-top: 1px solid #d7ddd1 !important;
+  }
+
+  product-info .product__accordion:last-of-type {
+    border-bottom: 1px solid #d7ddd1 !important;
+  }
+
+  product-info .product__accordion summary {
+    min-height: 52px !important;
+    padding: 0 2px !important;
+  }
+
+  product-info .accordion__title {
+    font-size: 12px !important;
+    letter-spacing: .065em !important;
+  }
+
+  product-info .accordion__content {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    padding: 0 2px 18px !important;
+  }
+
+  /* Benefits / details / recommendations — same width, same left and right edge. */
+  .velane-product-benefits {
+    border-top: 1px solid #eceee8 !important;
+    border-bottom: 1px solid #eceee8 !important;
+  }
+
+  .velane-benefits-grid {
+    max-width: 1320px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .velane-benefit-item {
+    justify-content: center !important;
+    gap: 11px !important;
+  }
+
+  .velane-benefit-icon {
+    width: 25px !important;
+    height: 25px !important;
+    flex-basis: 25px !important;
+  }
+
+  .velane-benefit-item strong {
+    font-size: 12px !important;
+  }
+
+  .velane-benefit-item small {
+    font-size: 9px !important;
+  }
+
+  .velane-product-details {
+    background: #e3e9dd !important;
+    padding: 64px 0 !important;
+  }
+
+  .velane-details-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 56px !important;
+    align-items: center !important;
+  }
+
+  .velane-details-eyebrow {
+    font-size: 9px !important;
+    letter-spacing: .22em !important;
+    margin-bottom: 12px !important;
+  }
+
+  .velane-details-copy h2 {
+    max-width: 500px !important;
+    margin: 0 0 14px !important;
+    font-size: clamp(32px, 2.8vw, 42px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .velane-details-copy .rte {
+    max-width: 560px !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  .velane-spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .velane-spec-card {
+    min-height: 82px !important;
+    padding: 16px 18px !important;
+    border-radius: 7px !important;
+  }
+
+  .velane-spec-card span {
+    font-size: 9px !important;
+    margin-bottom: 7px !important;
+  }
+
+  .velane-spec-card strong {
+    font-size: 12px !important;
+  }
+
+  .related-products.page-width {
+    padding-top: 64px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .related-products__heading {
+    position: relative !important;
+    margin: 0 0 26px !important;
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .related-products__heading::before {
+    content: 'STYLE FOR YOU';
+    display: block;
+    margin-bottom: 10px;
+    font-family: var(--font-body-family);
+    font-size: 9px;
+    line-height: 1.4;
+    letter-spacing: .22em;
+  }
+
+  .related-products__heading::after {
+    content: 'View all →';
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    font-family: var(--font-body-family);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .related-products .product-grid {
+    column-gap: 20px !important;
+    row-gap: 26px !important;
+  }
+
+  .related-products .card__inner,
+  .related-products .card__media .media {
+    border-radius: 9px !important;
+    overflow: hidden !important;
+  }
+
+  .related-products .card__heading {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+
+  .related-products .price {
+    font-size: 12px !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    product-info .page-width,
+    .velane-product-benefits .page-width,
+    .velane-product-details .page-width,
+    .related-products.page-width {
+      width: calc(100% - 40px) !important;
+    }
+
+    product-info .product {
+      gap: 24px !important;
+    }
+
+    .velane-details-grid {
+      gap: 36px !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    product-info .page-width,
+    .velane-product-details .page-width,
+    .related-products.page-width {
+      width: calc(100% - 32px) !important;
+      max-width: none !important;
+    }
+
+    product-info .product {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+
+    product-info .product__media-wrapper {
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
+    product-info .product-media-container,
+    product-info .product__media,
+    product-info .product__media img,
+    product-info .product__media-toggle,
+    product-info .product__media-toggle::after {
+      border-radius: 8px !important;
+    }
+
+    product-info .product__media-list {
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
+    product-info .product__info-container {
+      grid-template-columns: 50px minmax(0, 1fr) !important;
+      column-gap: 8px !important;
+    }
+
+    product-info .product__title h1 {
+      font-size: 19px !important;
+      line-height: 1.15 !important;
+    }
+
+    product-info .price--large {
+      font-size: 16px !important;
+    }
+
+    product-info .product__text {
+      font-size: 12px !important;
+      line-height: 1.55 !important;
+      margin: 12px 0 14px !important;
+    }
+
+    product-info .product-form__input {
+      margin-bottom: 14px !important;
+    }
+
+    product-info .product-form__input .form__label {
+      font-size: 12px !important;
+      margin-bottom: 7px !important;
+    }
+
+    product-info .product-form__input input[type=radio] + label {
+      min-width: 36px !important;
+      min-height: 32px !important;
+      padding: 7px 10px !important;
+      font-size: 11px !important;
+    }
+
+    product-info .velane-offers-block {
+      margin: 12px 0 !important;
+    }
+
+    product-info .velane-offers-heading {
+      font-size: 12px !important;
+      margin-bottom: 8px !important;
+    }
+
+    product-info .velane-offers-grid {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      scroll-snap-type: x proximity;
+      padding-bottom: 3px !important;
+    }
+
+    product-info .velane-offer-card {
+      flex: 0 0 76% !important;
+      min-width: 0 !important;
+      scroll-snap-align: start;
+      padding: 9px !important;
+      gap: 6px !important;
+    }
+
+    product-info .velane-offer-title,
+    product-info .velane-offer-value {
+      font-size: 10px !important;
+    }
+
+    product-info .velane-offer-sub,
+    product-info .velane-offer-value s {
+      font-size: 8px !important;
+    }
+
+    product-info .product-form__quantity {
+      max-width: 50px !important;
+      width: 50px !important;
+      margin: 2px 0 8px !important;
+    }
+
+    product-info quantity-input.quantity {
+      width: 50px !important;
+      min-height: 34px !important;
+      grid-template-columns: 16px 18px 16px !important;
+    }
+
+    product-info .quantity__button {
+      width: 16px !important;
+      min-width: 16px !important;
+    }
+
+    product-info .quantity__input {
+      font-size: 10px !important;
+      padding: 0 !important;
+    }
+
+    product-info .product-form__submit,
+    product-info .shopify-payment-button__button,
+    product-info .shopify-payment-button__button--unbranded {
+      min-height: 34px !important;
+      font-size: 10px !important;
+    }
+
+    product-info .product-form__submit {
+      margin: 2px 0 8px !important;
+    }
+
+    product-info .product__description {
+      font-size: 11px !important;
+      padding: 14px 0 15px !important;
+    }
+
+    product-info .product__description::before,
+    product-info .accordion__title {
+      font-size: 10px !important;
+    }
+
+    product-info .accordion__content {
+      font-size: 11px !important;
+    }
+
+    product-info .product__accordion summary {
+      min-height: 44px !important;
+    }
+
+    product-info .thumbnail-slider {
+      margin-top: 7px !important;
+    }
+
+    product-info .thumbnail-list {
+      gap: 6px !important;
+    }
+
+    product-info .thumbnail-list__item {
+      width: 46px !important;
+      max-width: 46px !important;
+    }
+
+    product-info .thumbnail {
+      border-radius: 5px !important;
+    }
+
+    .velane-product-benefits {
+      overflow-x: auto !important;
+    }
+
+    .velane-benefits-grid {
+      width: max-content !important;
+      max-width: none !important;
+      grid-template-columns: repeat(4, minmax(145px, 1fr)) !important;
+      gap: 14px !important;
+      padding: 18px 16px !important;
+    }
+
+    .velane-benefit-item {
+      justify-content: flex-start !important;
+    }
+
+    .velane-product-details {
+      padding: 42px 0 !important;
+    }
+
+    .velane-details-grid {
+      grid-template-columns: 1fr !important;
+      gap: 22px !important;
+    }
+
+    .velane-details-copy h2 {
+      max-width: 320px !important;
+      font-size: 28px !important;
+    }
+
+    .velane-details-copy .rte {
+      font-size: 11px !important;
+    }
+
+    .velane-spec-grid {
+      gap: 8px !important;
+    }
+
+    .velane-spec-card {
+      min-height: 68px !important;
+      padding: 12px !important;
+    }
+
+    .velane-spec-card span {
+      font-size: 8px !important;
+    }
+
+    .velane-spec-card strong {
+      font-size: 10px !important;
+    }
+
+    .related-products.page-width {
+      padding-top: 46px !important;
+      padding-bottom: 48px !important;
+    }
+
+    .related-products__heading {
+      text-align: center !important;
+      font-size: 24px !important;
+      margin-bottom: 20px !important;
+    }
+
+    .related-products__heading::before {
+      font-size: 8px !important;
+      margin-bottom: 7px !important;
+    }
+
+    .related-products__heading::after {
+      display: none !important;
+    }
+
+    .related-products .product-grid {
+      column-gap: 10px !important;
+      row-gap: 20px !important;
+    }
+
+    .related-products .card__heading {
+      font-size: 11px !important;
+    }
+
+    .related-products .price {
+      font-size: 10px !important;
+    }
+  }
+</style>
+
+<section class="velane-product-benefits color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width velane-benefits-grid">
+    {% for block in section.blocks %}
+      <div class="velane-benefit-item" {{ block.shopify_attributes }}>
+        <span class="velane-benefit-icon" aria-hidden="true">
+          {% case block.settings.icon %}
+            {% when 'shipping' %}
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v9H3V7Zm11 3h4l3 3v3h-7v-6ZM6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+            {% when 'warranty' %}
+              <svg viewBox="0 0 24 24" fill="none"><path d="m12 3 6 2v6c0 4-2.5 7-6 9-3.5-2-6-5-6-9V5l6-2Z"/><path d="m9 11 2 2 4-4"/></svg>
+            {% when 'returns' %}
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8"/><path d="M4 4v4h4"/></svg>
+            {% when 'cod' %}
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h8"/></svg>
+            {% else %}
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+          {% endcase %}
+        </span>
+        <div>
+          <strong>{{ block.settings.heading | escape }}</strong>
+          {% if block.settings.text != blank %}<small>{{ block.settings.text | escape }}</small>{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Velane product benefits",
+  "enabled_on": {"templates": ["product"]},
+  "settings": [
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 4,
+      "settings": [
+        {"type":"select","id":"icon","label":"Icon","default":"shipping","options":[{"value":"shipping","label":"Shipping"},{"value":"warranty","label":"Warranty"},{"value":"returns","label":"Returns"},{"value":"cod","label":"COD"},{"value":"check","label":"Check"}]},
+        {"type":"text","id":"heading","label":"Heading","default":"Free Shipping"},
+        {"type":"text","id":"text","label":"Text","default":"On orders over ₹499"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name":"Velane product benefits",
+    "blocks":[{"type":"benefit"},{"type":"benefit"},{"type":"benefit"},{"type":"benefit"}]
+  }]
+}
+{% endschema %}

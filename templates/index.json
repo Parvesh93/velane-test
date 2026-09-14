@@ -1,75 +1,442 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "velane-hero",
+      "settings": {
+        "eyebrow": "END OF SEASON SALE · LIVE NOW",
+        "heading": "Flat 50% Off on\neverything gold.",
+        "description": "<p>Certified 925 silver with 18k gold plating. Anti-tarnish, hypoallergenic, and made to be worn every single day.</p>",
+        "button": "SHOP THE SALE",
+        "link": "",
+        "notes": "✓ 925 Sterling Silver   ·   ✓ 18k Gold Plated   ·   ✓ 6 Month Warranty",
+        "image": "shopify://shop_images/image_3_1.png",
+        "mobile_image": "shopify://shop_images/image_3_2.png",
+        "image_alt": "Gold statement necklace styled with a tailored cream blazer",
+        "featured_product": "",
+        "spotlight_title": "The Statement Necklace"
+      }
+    },
+    "benefits": {
+      "type": "velane-benefits",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "b0": {
+          "type": "benefit",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "icon": "truck",
+            "heading": "Free Shipping",
+            "text": "On orders over ₹2,000"
           }
         },
-        "button": {
-          "type": "buttons",
+        "b1": {
+          "type": "benefit",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "check-mark",
+            "heading": "6 Month Warranty",
+            "text": "On every piece"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "return",
+            "heading": "Easy 15 Day Return",
+            "text": "Simple, hassle-free"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "price-tag",
+            "heading": "COD Available",
+            "text": "Pay on delivery"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {}
+    },
+    "categories": {
+      "type": "velane-categories",
+      "blocks": {
+        "b0": {
+          "type": "category",
+          "settings": {
+            "title": "Rings",
+            "collection": "",
+            "reference": "rings"
+          }
+        },
+        "b1": {
+          "type": "category",
+          "settings": {
+            "title": "Earrings",
+            "collection": "",
+            "reference": "earrings"
+          }
+        },
+        "b2": {
+          "type": "category",
+          "settings": {
+            "title": "Necklaces",
+            "collection": "",
+            "reference": "necklaces"
+          }
+        },
+        "b3": {
+          "type": "category",
+          "settings": {
+            "title": "Bracelets",
+            "collection": "",
+            "reference": "bracelets"
+          }
+        },
+        "b4": {
+          "type": "category",
+          "settings": {
+            "title": "Bangles",
+            "collection": "",
+            "reference": "bangles"
+          }
+        },
+        "b5": {
+          "type": "category",
+          "settings": {
+            "title": "Pendants",
+            "collection": "",
+            "reference": "pendants"
+          }
+        },
+        "b6": {
+          "type": "category",
+          "settings": {
+            "title": "Anklets",
+            "collection": "",
+            "reference": "anklets"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "heading": "Shop By Category",
+        "text": "Handpicked collections. Timeless beauty."
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "promotions": {
+      "type": "velane-promotions",
+      "blocks": {
+        "b0": {
+          "type": "gift",
+          "settings": {
+            "eyebrow": "CURATED FOR HIM",
+            "heading": "MEN’S\nJEWELLERY",
+            "text": "Timeless style. Modern you.",
+            "button": "FOR HIM",
+            "link": "",
+            "reference": "men"
+          }
+        },
+        "b1": {
+          "type": "gift",
+          "settings": {
+            "eyebrow": "CURATED FOR HER",
+            "heading": "WOMEN’S\nJEWELLERY",
+            "text": "Express elegance. Celebrate you.",
+            "button": "FOR HER",
+            "link": "",
+            "reference": "women"
+          }
+        },
+        "b2": {
+          "type": "offer",
+          "settings": {
+            "heading": "Under ₹999",
+            "text": "Elevated essentials",
+            "link": "",
+            "dark": false
+          }
+        },
+        "b3": {
+          "type": "offer",
+          "settings": {
+            "heading": "Buy 2 Get 1",
+            "text": "Build your stack",
+            "link": "",
+            "dark": false
+          }
+        },
+        "b4": {
+          "type": "offer",
+          "settings": {
+            "heading": "New this week",
+            "text": "Catch the newness",
+            "link": "",
+            "dark": true
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {}
+    },
+    "bestsellers": {
+      "type": "velane-products",
+      "blocks": {
+        "b0": {
+          "type": "tab",
+          "settings": {
+            "title": "Rings",
+            "collection": "earring"
+          }
+        },
+        "b1": {
+          "type": "tab",
+          "settings": {
+            "title": "Earrings",
+            "collection": ""
+          }
+        },
+        "b2": {
+          "type": "tab",
+          "settings": {
+            "title": "Necklaces",
+            "collection": "rings"
+          }
+        },
+        "b3": {
+          "type": "tab",
+          "settings": {
+            "title": "Bracelets",
+            "collection": ""
+          }
+        },
+        "b4": {
+          "type": "tab",
+          "settings": {
+            "title": "Under ₹999",
+            "collection": ""
+          }
+        },
+        "b5": {
+          "type": "tab",
+          "settings": {
+            "title": "Luxe",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "eyebrow": "BESTSELLERS",
+        "heading": "Loved By 2M+ Women",
+        "anchor": "velane-bestsellers",
+        "collection": "earring",
+        "limit": 4,
+        "show_reference": true,
+        "reference_offset": "0"
+      }
+    },
+    "craft": {
+      "type": "velane-craft",
+      "blocks": {
+        "b0": {
+          "type": "stat",
+          "settings": {
+            "value": "925",
+            "label": "Sterling Silver"
+          }
+        },
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "value": "18k",
+            "label": "Gold Plated"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "value": "3×",
+            "label": "Layer Coating"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "value": "6M",
+            "label": "Warranty"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "eyebrow": "OUR CRAFT",
+        "heading": "Anti-tarnish.\nHand-finished.",
+        "text": "<p>Every piece is made from 925 sterling silver with a triple layer of 18k gold, engineered to stay bright through daily wear, water, and workouts.</p>",
+        "image": "shopify://shop_images/image_6_3.png",
+        "image_alt": "Artisan hand-finishing jewellery at a workbench",
+        "button": "Learn about our craft",
+        "link": ""
+      }
+    },
+    "new_arrivals": {
+      "type": "velane-products",
+      "settings": {
+        "eyebrow": "NEW ARRIVALS",
+        "heading": "Fresh Drops, Timeless Style",
+        "anchor": "velane-new-arrivals",
+        "collection": "",
+        "limit": 4,
+        "show_reference": true,
+        "reference_offset": "4"
+      }
+    },
+    "testimonials": {
+      "type": "velane-testimonials",
+      "blocks": {
+        "b0": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
+        },
+        "b1": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
+        },
+        "b2": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "author": "",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "heading": "Testimonials",
+        "text": "Real words from real customers."
+      }
+    },
+    "instagram": {
+      "type": "velane-instagram",
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {
+            "alt": "Statement necklace styling",
+            "link": ""
+          }
+        },
+        "b1": {
+          "type": "image",
+          "settings": {
+            "alt": "Layered gold necklaces",
+            "link": ""
+          }
+        },
+        "b2": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold twist rings",
+            "link": ""
+          }
+        },
+        "b3": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold hoop earrings",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "image",
+          "settings": {
+            "alt": "Pearl pendant necklace",
+            "link": ""
+          }
+        },
+        "b5": {
+          "type": "image",
+          "settings": {
+            "alt": "Gold cuff bracelet",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "heading": "Follow Us On Instagram",
+        "handle": "@velane",
+        "link": ""
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "benefits",
+    "categories",
+    "promotions",
+    "bestsellers",
+    "craft",
+    "new_arrivals",
+    "testimonials",
+    "instagram"
   ]
 }
