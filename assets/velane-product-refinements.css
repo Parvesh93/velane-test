@@ -1,0 +1,307 @@
+/* Final Velane PDP refinements. Loaded after velane-dawn-product.css. */
+
+/* Keep product-page sections on one shared design grid. */
+.velane-product-benefits .page-width {
+  width: calc(100% - 80px) !important;
+  max-width: 1360px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Product info uses one predictable purchase-control grid. */
+product-info .product__info-container {
+  display: grid !important;
+  grid-template-columns: 116px minmax(0, 1fr) !important;
+  column-gap: 12px !important;
+  width: 100% !important;
+}
+
+product-info .product__info-container > * {
+  grid-column: 1 / -1;
+}
+
+product-info .product-form__quantity {
+  grid-column: 1 !important;
+  width: 116px !important;
+  max-width: 116px !important;
+  margin: 0 0 10px !important;
+  align-self: start !important;
+}
+
+product-info quantity-input.quantity {
+  width: 116px !important;
+  min-height: 44px !important;
+}
+
+product-info .product__info-container > div:has(> product-form.product-form),
+product-info product-form.product-form,
+product-info product-form.product-form form.form,
+product-info .product-form__buttons {
+  display: contents !important;
+}
+
+product-info .product-form__error-message-wrapper,
+product-info pickup-availability {
+  grid-column: 1 / -1 !important;
+}
+
+product-info .product-form__submit {
+  grid-column: 2 !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  margin: 0 0 10px !important;
+}
+
+product-info .shopify-payment-button {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  margin: 0 0 12px !important;
+}
+
+product-info .shopify-payment-button__button,
+product-info .shopify-payment-button__button--unbranded {
+  width: 100% !important;
+  min-height: 44px !important;
+}
+
+/* Softer, more premium variant borders. */
+product-info .product-form__input input[type='radio'] + label {
+  border-color: #d2d8cf !important;
+  box-shadow: none !important;
+}
+
+product-info .product-form__input input[type='radio'] + label:hover {
+  border-color: #a9b2a5 !important;
+}
+
+product-info .product-form__input input[type='radio']:checked + label {
+  border-color: #98a292 !important;
+  box-shadow: none !important;
+  background: #fbfcf9 !important;
+}
+
+/* Detail-card values need stronger hierarchy. */
+.velane-spec-card strong {
+  font-weight: 650 !important;
+  color: #20251e !important;
+}
+
+/* Premium USP strip. */
+.velane-product-benefits {
+  overflow: visible !important;
+  background: #fffdf8 !important;
+  border-top: 1px solid #e8ebe4 !important;
+  border-bottom: 1px solid #e8ebe4 !important;
+}
+
+.velane-benefits-grid {
+  width: calc(100% - 80px) !important;
+  max-width: 1360px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  padding: 28px 0 !important;
+}
+
+.velane-benefit-item {
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+.velane-benefit-icon {
+  width: 38px !important;
+  height: 38px !important;
+  flex: 0 0 38px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px solid #dfe5da !important;
+  border-radius: 50% !important;
+  background: #f0f3ed !important;
+  color: #3f493b !important;
+}
+
+.velane-benefit-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.55 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.velane-benefit-item strong {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  line-height: 1.3 !important;
+  letter-spacing: .01em !important;
+  color: #20251e !important;
+}
+
+.velane-benefit-item small {
+  display: block !important;
+  margin-top: 3px !important;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+  color: #737970 !important;
+}
+
+@media screen and (max-width: 989px) {
+  .velane-product-benefits .page-width,
+  .velane-benefits-grid {
+    width: calc(100% - 40px) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  /* Match the main mobile content gutter and remove Dawn slider overflow. */
+  product-info .page-width,
+  .velane-product-details .page-width,
+  .velane-product-benefits .page-width {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+  }
+
+  product-info .product__media-wrapper,
+  product-info .product__media-list,
+  product-info .product__media-item,
+  product-info .product-media-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  product-info .product__media-list {
+    gap: 8px !important;
+    scroll-padding-left: 0 !important;
+  }
+
+  product-info .product__media-item {
+    flex: 0 0 100% !important;
+    padding-left: 0 !important;
+  }
+
+  /* Do not force mobile product photography into a square crop. */
+  product-info .product-media-container,
+  product-info .product__media {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding-top: 0 !important;
+  }
+
+  product-info .product__media img {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  product-info .product__media-icon {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  /* Quantity + Add to Cart stay balanced on one row. */
+  product-info .product__info-container {
+    grid-template-columns: 96px minmax(0, 1fr) !important;
+    column-gap: 10px !important;
+  }
+
+  product-info .product-form__quantity {
+    width: 96px !important;
+    max-width: 96px !important;
+    margin: 0 0 10px !important;
+  }
+
+  product-info quantity-input.quantity {
+    width: 96px !important;
+    min-height: 44px !important;
+    grid-template-columns: 30px 36px 30px !important;
+  }
+
+  product-info .quantity__button {
+    width: 30px !important;
+    min-width: 30px !important;
+  }
+
+  product-info .quantity__input {
+    padding: 0 !important;
+    font-size: 11px !important;
+  }
+
+  product-info .product-form__submit,
+  product-info .shopify-payment-button__button,
+  product-info .shopify-payment-button__button--unbranded {
+    min-height: 44px !important;
+    font-size: 10px !important;
+  }
+
+  product-info .product-form__submit {
+    margin: 0 0 10px !important;
+  }
+
+  product-info .shopify-payment-button {
+    margin-bottom: 12px !important;
+  }
+
+  /* Slightly softer selected option on small screens too. */
+  product-info .product-form__input input[type='radio'] + label {
+    border-color: #d5dad2 !important;
+  }
+
+  product-info .product-form__input input[type='radio']:checked + label {
+    border-color: #98a292 !important;
+  }
+
+  /* USP section becomes a tidy 2x2 grid instead of a horizontal scroller. */
+  .velane-product-benefits {
+    overflow: visible !important;
+  }
+
+  .velane-benefits-grid {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px 12px !important;
+    padding: 22px 0 !important;
+  }
+
+  .velane-benefit-item {
+    justify-content: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .velane-benefit-icon {
+    width: 36px !important;
+    height: 36px !important;
+    flex-basis: 36px !important;
+  }
+
+  .velane-benefit-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .velane-benefit-item strong {
+    font-size: 11px !important;
+  }
+
+  .velane-benefit-item small {
+    font-size: 8.5px !important;
+  }
+
+  .velane-spec-card strong {
+    font-weight: 650 !important;
+  }
+}
