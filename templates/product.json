@@ -6,7 +6,7 @@
         "style_loader": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{{ 'velane-dawn-product.css' | asset_url | stylesheet_tag }}"
+            "custom_liquid": "{{ 'velane-dawn-product.css' | asset_url | stylesheet_tag }}{{ 'velane-product-refinements.css' | asset_url | stylesheet_tag }}"
           }
         },
         "title": {"type": "title", "settings": {}},
